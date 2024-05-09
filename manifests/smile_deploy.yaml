@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smile-deployment
+spec:
+  replicas: 3  # Set the desired number of replicas based on your scalability requirements
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-app
+          image: my-node-app:latest  # Use the Docker image built from your Dockerfile
+          ports:
+            - containerPort: 3000
