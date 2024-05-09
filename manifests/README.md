@@ -9,10 +9,10 @@ Use the Kubernetes command-line tool (kubectl) to connect to your Kubernetes clu
 ### STEP 3 - Apply the Manifests:
 Navigate to the directory where you saved the Kubernetes manifests and apply them to your Kubernetes cluster using the kubectl apply command:
 
-`kubectl apply -f Deployment.yaml`
-`kubectl apply -f Service.yaml`
-`kubectl apply -f HorizontalPodAutoscaler.yaml`
-`kubectl apply -f Ingress.yaml`
+`kubectl apply -f smile_deploy.yaml`
+`kubectl apply -f smile_svc.yaml`
+`kubectl apply -f smile_hpa.yaml`
+`kubectl apply -f smile_ingress.yaml`
 
 This command will create the necessary Kubernetes resources (Deployment, Service, HorizontalPodAutoscaler, and Ingress) on your Kubernetes cluster.
 
