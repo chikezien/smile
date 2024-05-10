@@ -28,7 +28,7 @@ resource "aws_security_group" "eks_cluster_sg" {
     from_port   = 3000
     to_port     = 3000
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Adjust as necessary for your security requirements
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -84,4 +84,19 @@ resource "aws_eks_node_group" "node_group" {
     min_size     = 1
   }
   instance_types = [var.instance_type]
+}
+
+# Create an S3 bucket for CloudTrail logs
+resource "aws_s3_bucket" "cloudtrail_logs" {
+  bucket = "my-cloudtrail-logs-${var.region}"
+  acl    = "private"
+}
+
+# CloudTrail setup to use the S3 bucket
+resource "aws_cloudtrail" "api_activity_trail" {
+  name                          = "api-activity-trail-${var.region}"
+  s3_bucket_name                = aws_s3_bucket.cloudtrail_logs.bucket
+  include_global_service_events = true
+  is_multi_region_trail         = true
+  enable_logging                = true
 }
