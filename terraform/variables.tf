@@ -1,13 +1,12 @@
-# variables.tf
-
 variable "region" {
   description = "AWS region where resources will be created"
   default     = "us-west-2"
 }
 
-variable "availability_zone" {
-  description = "AWS availability zone for subnets"
-  default     = "us-west-2a"
+variable "availability_zones" {
+  description = "List of availability zones in the region"
+  type        = list(string)
+  default     = ["us-west-2a", "us-west-2b"]
 }
 
 variable "cluster_name" {
@@ -22,6 +21,7 @@ variable "vpc_cidr_block" {
 
 variable "subnet_cidr_blocks" {
   description = "CIDR blocks for subnets"
+  type        = list(string)
   default     = ["10.0.1.0/24", "10.0.2.0/24"]
 }
 
