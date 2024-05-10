@@ -49,9 +49,9 @@ Open a terminal, navigate to your application's root directory (where the Docker
 `docker build -t smile-app .`
 
 ### STEP 3 - Run the Docker Container:
-After the image is built, you can run a Docker container based on that image using the following command:
+After the image is built, you can run a Docker container based on that image using the following command in detached:
 
-`docker run -p 3000:3000 smile-app`
+`docker run -d -p 3000:3000 smile-app`
 
 This command maps port 3000 of the Docker container to port 3000 on your host machine.
 The application should now be running inside a Docker container. You can then access the application by opening a web browser and navigating to http://localhost:3000, or by sending a GET request to http://localhost:3000 using tools like cURL or Postman.
