@@ -2,11 +2,30 @@ apiVersion: v1
 kind: Service
 metadata:
   name: smile-service
+  annotations:
+    # Enable SSL termination at the load balancer (specify the SSL certificate ARN)
+    # service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:REGION:ACCOUNT-ID:certificate/CERTIFICATE-ID"
+
+    # Specify that the Load Balancer should be internal
+    # service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+
+    # Use an Application Load Balancer instead of a classic one
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb-ip"
+
+    # Specify the load balancer should use the IP mode (when using nlb-ip with EKS)
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+
+    # Enable access logs for the load balancer
+    service.beta.kubernetes.io/aws-load-balancer-access-log-enabled: "true"
+    service.beta.kubernetes.io/aws-load-balancer-access-log-emit-interval: "5"
+    service.beta.kubernetes.io/aws-load-balancer-access-log-s3-bucket-name: "my-load-balancer-logs"
+    service.beta.kubernetes.io/aws-load-balancer-access-log-s3-bucket-prefix: "my-app-logs"
+
 spec:
   selector:
-    app: my-app
+    app: my-app  # Ensure this matches the labels on your Pod template
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 3000
-  type: LoadBalancer  # Expose the service externally via a LoadBalancer
+      targetPort: 3000  # Make sure your application within the pod is listening on this port
+  type: LoadBalancer  # Exposes the service externally using a LoadBalancer
