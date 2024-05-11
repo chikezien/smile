@@ -9,7 +9,7 @@ Verify that Node.js and npm are installed by running the following commands in y
 
 ### STEP 2 - Clone the Repo
 
-### STEP 3 - Navigate into smile-app Directory and Initialize Node.js Project: 
+### STEP 3 - Navigate into smile_app Directory and Initialize Node.js Project: 
 
 Then, initialize a new Node.js project by running the following command:
 
